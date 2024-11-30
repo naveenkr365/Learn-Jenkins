@@ -7,8 +7,8 @@ pipeline {
       }
       steps {
         sh 'mvn --version'
-        sh 'javac -d target HelloWorld.java'
-        sh 'java -cp target HelloWorld.MainClass'
+        sh 'javac -d target multi-stage-multi-agent/HelloWorld.java'
+        sh 'java -cp target multi-stage-multi-agent/HelloWorld.MainClass'
       }
     }
     stage('Front-end') {
