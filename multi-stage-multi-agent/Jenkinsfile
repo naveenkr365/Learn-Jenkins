@@ -6,9 +6,9 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-        sh 'mvn --version'
-        sh 'javac -d target multi-stage-multi-agent/HelloWorld.java'
-        sh 'java -cp target multi-stage-multi-agent/HelloWorld.MainClass'
+        sh 'mvn --version'  // Ensure Maven is available, though not needed for the build
+        sh 'javac -d target multi-stage-multi-agent/HelloWorld.java'  // Manually compile the Java program
+        sh 'java -cp target multi.stage.multi.agent.HelloWorld'  // Run the Java program
       }
     }
     stage('Front-end') {
@@ -16,12 +16,8 @@ pipeline {
         docker { image 'node:16-alpine' }
       }
       steps {
-        sh 'node --version'
-        sh '''
-                sudo apt update
-                sudo apt install -y nodejs npm
-                '''
-        sh 'npm -v'
+        sh 'node --version'  // Verify Node.js version
+        sh 'npm -v'  // Verify npm version
       }
     }
   }
