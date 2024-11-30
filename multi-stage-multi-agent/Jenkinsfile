@@ -6,9 +6,20 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-        sh 'mvn --version'  // Ensure Maven is available, though not needed for the build
-        sh 'javac -d target multi-stage-multi-agent/HelloWorld.java'  // Manually compile the Java program
-        sh 'java -cp target multi.stage.multi.agent.HelloWorld'  // Run the Java program
+        // Ensure Maven is available
+        sh 'mvn --version'
+
+        // Create necessary directories under target
+        sh 'mkdir -p target/multi/stage/multi/agent'
+
+        // Compile the Java program
+        sh 'javac -d target multi-stage-multi-agent/HelloWorld.java'
+
+        // List the contents of the target directory for debugging
+        sh 'ls -R target'
+
+        // Run the Java program
+        sh 'java -cp target multi.stage.multi.agent.HelloWorld'
       }
     }
     stage('Front-end') {
